@@ -11,27 +11,21 @@ btnAdd.addEventListener('click', onBtnAddClick);
 
 function onToDoListClick(event){
     const listItem = event.target.closest(".list-item");
+    const getBtn = event.target.classList.contains('delBtn');
 
-    removeItem(event, listItem);
-    doneItem(event, listItem);
+    if(!getBtn){
+        listItem.classList.toggle("green");
+    }
+    
+    if(getBtn){
+        listItem.remove();
+    }
 }
 
 function onBtnAddClick (){
     const listItemText = getInputValue();
     listItemText.trim() === '' ? showErr() : addToList(listItemText);
     inputClear();
-}
-
-function removeItem(e, elemRemove){
-    if(e.target.classList.contains('delBtn')){
-        elemRemove.remove();
-    }
-}
-
-function doneItem(e, paintElem){
-    if(!e.target.classList.contains('delBtn')){
-        paintElem.classList.toggle("green");
-    }
 }
 
 function addToList(message){
